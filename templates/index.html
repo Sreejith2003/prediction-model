@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Water Quality Prediction</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to bottom right, #000428, #004e92);
+            font-family: Arial, sans-serif;
+            color: #fff;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            padding: 30px;
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+            color: #f1f1f1;
+        }
+
+        h1 {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+        }
+
+        /* Form styling */
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        form label {
+            margin: 10px 0 5px;
+            font-weight: bold;
+            font-size: 1em;
+        }
+
+        form input {
+            padding: 12px;
+            border-radius: 5px;
+            border: none;
+            font-size: 1em;
+            color: #333;
+        }
+
+        form input:focus {
+            outline: none;
+            box-shadow: 0 0 5px #00c6ff;
+        }
+
+        form button {
+            margin-top: 20px;
+            padding: 12px;
+            border-radius: 5px;
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            color: white;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        form button:hover {
+            background: linear-gradient(to right, #0072ff, #00c6ff);
+        }
+
+        .result {
+            font-size: 1.5em;
+            margin-top: 20px;
+        }
+
+        .polluted {
+            color: #ff4b5c;
+            font-weight: bold;
+        }
+
+        .not-polluted {
+            color: #0fbc00;
+            font-weight: bold;
+        }
+
+        .btn-back {
+            padding: 12px;
+            margin-top: 20px;
+            background-color: #444;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .btn-back:hover {
+            background-color: #00c6ff;
+            box-shadow: 0 0 5px #00c6ff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Water Quality Prediction System</h1>
+        <form action="{{ url_for('predict') }}" method="POST">
+            <label for="state">Enter State:</label>
+            <input type="text" id="state" name="state" required placeholder="Enter the state">
+
+            <label for="location">Enter Location:</label>
+            <input type="text" id="location" name="location" required placeholder="Enter the location">
+
+            <button type="submit">Predict Pollution</button>
+        </form>
+
+        {% if result is not none %}
+            <h1>Prediction Result</h1>
+            <p class="result {{ 'polluted' if 'Polluted' in result else 'not-polluted' }}">{{ result }}</p>
+        {% endif %}
+
+        <a href="{{ url_for('home') }}" class="btn-back">Go back to Home</a>
+    </div>
+</body>
+</html>
