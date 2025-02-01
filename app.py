@@ -9,7 +9,7 @@ import numpy as np
 app = Flask(_name_)
 
 # Load and preprocess the dataset
-csv_path = "C:\\Users\\sreej\\OneDrive\\Documents\\Water_Quality\\water_dataX.csv"  # Update with the correct path
+csv_path = "Path_To_Your_File"  # Update with the correct path
 
 def load_data():
     try:
